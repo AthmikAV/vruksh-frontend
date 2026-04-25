@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/profile' element={<Profile />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/tree/:id' element={<TreeDetail />} />
-        <Route path='/donate' element={<Donate />} />
+        <Route path='/donate/:id?' element={<Donate />} />
       </Routes>
     </AuthProvider>
   </Provider>
