@@ -1,4 +1,7 @@
 import { Leaf, Trees, Users, MapPin, Wind, ChevronRight, CheckCircle } from "lucide-react";
+import { protectedNavigate } from "../utils/protectedNavigate";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 const stats = [
   { icon: <Trees size={22} />, value: "12,000+", label: "Trees Planted" },
@@ -32,11 +35,13 @@ const values = [
   { icon: "🌍", title: "Real Impact", desc: "Every tree is geotagged and photographed so you see exactly what your money did" },
 ];
 export default function About() {
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   return (
     <div className="bg-white text-gray-800 font-sans">
 
       {/* Hero Mission */}
-      <section className="bg-gradient-to-br from-green-700 to-emerald-500 text-white py-20 px-6 text-center">
+      <section className="bg-gradient-to-br bg-[#1a3a0d] to-emerald-500 text-white py-20 px-6 text-center">
         <div className="max-w-3xl mx-auto">
           <span className="inline-block bg-white/20 text-white text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-5">
             🌿 Our Mission
@@ -247,9 +252,12 @@ export default function About() {
         <p className="text-green-100 mb-8 text-lg">
           Join 3,400+ donors making a real difference for just ₹400.
         </p>
-        <button className="inline-flex items-center gap-2 bg-white text-green-700 font-bold px-8 py-3 rounded-full hover:bg-green-50 transition-all duration-300 shadow-lg">
-          Plant a Tree Now <ChevronRight size={18} />
-        </button>
+        <button
+  onClick={() => protectedNavigate(navigate, user, "/donate")}
+  className="inline-flex items-center gap-2 bg-white text-green-700 font-bold px-8 py-3 rounded-full hover:bg-green-50 transition-all duration-300 shadow-lg cursor-pointer"
+>
+  Plant a Tree Now <ChevronRight size={18} />
+</button>
       </section>
 
     </div>
